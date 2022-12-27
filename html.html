@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="result.js"></script>
+    <script src="time.js"></script>
+    <meta charset="UTF-8">
+    <title>TimeMachineForBili0.1</title>
+    <style>
+        #app{
+            width: 90%;
+            border: 2px solid rgb(187, 187, 187);
+            padding: 0.6%;
+            margin: 0 auto;
+            border-radius: 20px;
+        }
+        .window{
+            width: 28.21%;
+            position: absolute;
+            overflow: auto;
+        
+        }
+        .box{
+            width: 1000%;
+        }
+        .box div{
+            float: left;
+        }
+        .box div a img{
+            height: 100%;
+            width: auto;
+        }
+    </style>
+    <style>
+        .desk{
+            width: 66.66%;
+            margin-left: 33.33%;
+            font-size: 0;
+            display: block;
+            padding: 0;
+            
+        }
+        .desk li{
+            width: 23%;
+            margin:  0 auto;
+            padding: 1%;
+            border:0;
+            min-width: 60px;
+            display: inline-block;
+            list-style: nano;
+            font-size: 16px;
+            vertical-align: bottom;
+            
+        }
+        .desk li a img{
+            width: 100%;
+            border-radius: 10px;
+            margin-bottom: 5px;
+        }
+        .desk li a div{
+            width: 100%;
+            height: 30px;
+            overflow:hidden;
+            font-size: 14px;
+            line-height: 15px;
+            color: black;
+        }
+        .desk li a{
+            text-decoration:none;
+        }
+    </style>
+    <style>
+        .header{
+            width:100%;
+            height:30px;
+            margin: auto;
+        }
+        .header div p{
+            width:50%;
+            color: black;
+            font-size: 19px;
+            font-family: fantasy;
+            text-align: center;
+            margin: auto;
+
+        }
+        .header div{
+            width: 33.33%;
+            float: left;
+        }
+        .leftButton{
+            float: right;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        
+        
+        <div class="header">
+            <div><button class="leftButton" @click="dayFront()">前一天</button></div>
+            <div><p>{{date}}</p></div>
+            <div><button @click="dayBack()">后一天</button></div>
+        </div>
+        <div class="window">
+
+            <div class="box">
+                
+                <div v-for="key in panelKeys">
+                    <a target="_blank" v-bind:href="res['panel'][key][0]">
+                    <img v-bind:src="'https://'+res['panel'][key][1]">
+                    <p>{{key}}</p>
+                    </a>
+                </div>
+                
+                
+            </div>
+        </div>
+        
+        <ul class="desk" >
+            <li v-for="key in videoKeys">
+                <a target="_blank" v-bind:href="res['video'][key][0]">
+                    <img v-bind:src="'https://'+res['video'][key][1]"></img>
+                    <div>{{key}}</div>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <script>
+        //计算日期，字典取值
+        var date=dayMove(result,10,-4,1,0)
+        var res=result[date]
+        var videoKeys=[];var panelKeys=[]
+        for(key in res['video']){
+            videoKeys.push(key)
+        }
+        for(key in res['panel']){
+            panelKeys.push(key)
+        }
+        //橱窗
+        //vue
+        const desk = {
+            data() {
+                return {
+                    dMove:0,
+                    res:res,
+                    videoKeys:videoKeys,
+                    date:date,
+                    panelKeys:panelKeys
+                }
+            },
+            methods:{
+                dayBack(){
+                    do{
+                        this.dMove+=1
+                        var date1=dayMove(result,10,-4,1,this.dMove)
+                    }while(this.date==date1)
+                    this.date=date1
+                    this.res=result[this.date]
+                    this.videoKeys=[]; this.panelKeys=[]
+                    for(key in this.res['video']){
+                        this.videoKeys.push(key)
+                    }
+                    for(key in this.res['panel']){
+            this.panelKeys.push(key)
+        }
+                    this.$forceUpdate()
+                },
+                dayFront(){
+                    do{
+                    this.dMove-=1
+                    var date1=dayMove(result,10,-4,1,this.dMove)
+                    }while(this.date==date1)
+                    this.date=date1
+                    this.res=result[this.date]
+                    this.videoKeys=[]; this.panelKeys=[]
+                    for(key in this.res['video']){
+                        this.videoKeys.push(key)
+                    }
+                    for(key in this.res['panel']){
+            this.panelKeys.push(key)
+        }
+                    this.$forceUpdate()
+                }
+
+            },
+        }
+        Vue.createApp(desk).mount('#app')
+    </script>
+</body>
+</html>
