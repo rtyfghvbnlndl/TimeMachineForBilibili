@@ -217,7 +217,7 @@
     setTimeout(function(){
         document.getElementsByClassName('bili-grid')[1].innerHTML+=text
         document.getElementsByClassName('bili-grid')[1].classList=''
-        var date=dayMove(result,10,-4,1,0)
+        var date=dayMove(result,9999,-4,1,0)
         var res=result[date]
         var videoKeys=[];var panelKeys=[]
         for(key in res['video']){
@@ -243,7 +243,7 @@
                 dayBack(){
                     do{
                         this.dMove+=1
-                        var date1=dayMove(result,10,-4,1,this.dMove)
+                        var date1=dayMove(result,9999,-4,1,this.dMove)
                     }while(this.date==date1)
                     this.date=date1
                     this.res=result[this.date]
@@ -261,7 +261,7 @@
                 dayFront(){
                     do{
                     this.dMove-=1
-                    var date1=dayMove(result,10,-4,1,this.dMove)
+                    var date1=dayMove(result,9999,-4,1,this.dMove)
                     }while(this.date==date1)
                     this.date=date1
                     this.res=result[this.date]
