@@ -1,6 +1,7 @@
 # TimeMachineForBilibili
 Tampermonkey脚本，把b站头图和logo换成历史样式，并能跟随时间变化
-### <a href='https://greasyfork.org/zh-CN/scripts/456519-bilibili%E5%A4%B4%E5%9B%BE%E6%97%B6%E5%85%89%E6%9C%BAtimemachineforbilibili'>安装脚本</a>
+### <a target="_blank" href='https://greasyfork.org/zh-CN/scripts/456519-bilibili%E5%A4%B4%E5%9B%BE%E6%97%B6%E5%85%89%E6%9C%BAtimemachineforbilibili'>安装脚本</a>
+### <a target="_blank" href='https://www.bilibili.com/video/BV1pP4y1v7wK'>视频介绍（bili）</a>
 ### 已实现功能
 1. 更换历史头图
 2. 更换历史logo
